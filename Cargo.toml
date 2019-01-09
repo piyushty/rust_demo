@@ -1,0 +1,8 @@
+[package]
+name = "RustDemo"
+version = "0.1.0"
+authors = ["piyushty <piyushtyagi21jul@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+rand = "0.3.14"
