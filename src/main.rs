@@ -1,31 +1,27 @@
-use std::io;
-
 fn main() {
-    println!("Guess the number!");
+    let my_string = String::from("hello world");
 
-    println!("Please input your guess.");
+    // first_word works on slices of `String`s
+    let word = first_word(&my_string[..]);
 
-    let mut guess = String::new();
+    let my_string_literal = "hello world";
 
-    io::stdin().read_line(&mut guess)
-        .expect("Failed to read line");
+    // first_word works on slices of string literals
+    let word = first_word(&my_string_literal[..]);
 
-    println!("You guessed: {}", guess);
+    // Because string literals *are* string slices already,
+    // this works too, without the slice syntax!
+    let word = first_word(my_string_literal);
 }
 
-fn fahrenheit_to_celcius(frhn: f32) -> f32 {
-    (frhn - 32.0) * 5.0 / 9.0
-}
+fn first_word(s: &str) -> &str {
+    let bytes = s.as_bytes();
 
-fn fibonacci(no_of_terms: u32) {
-    let mut x = 1;
-    let mut y = 1;
-    println!("{}", x);
-    println!("{}", y);
-    for _counter in (0..no_of_terms).rev() {
-        let temp = x;
-        x = x + y;
-        println!("{}", x);
-        y = temp;
+    for (i, &item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return &s[0..i];
+        }
     }
+
+    &s[..]
 }
